@@ -1,45 +1,39 @@
-# additional-custom-syntax-higlight
+# Additional Custom Syntax Highlight
 
 ![Build](https://github.com/Only1Loatheb/additional-custom-syntax-higlight/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [group](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml), [name](./src/main/resources/META-INF/plugin.xml), and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin [description](./src/main/resources/META-INF/plugin.xml) (see [Tips][docs:plugin-description]) and this README to describe what your plugin does.
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+An IntelliJ Platform plugin that allows you to configure custom regular expression rules to highlight words and patterns on top of any language's syntax highlighting.
 
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+## Features
+
+- **Regex-based Word Search**: Define any regular expression to match identifiers, keywords, numbers, or custom tokens.
+- **Works On Top of Any Language**: Highlight layers directly on top of base language syntax highlighting across all file types (`.java`, `.kt`, `.py`, `.md`, `.txt`, `.xml`, etc.).
+- **Rich Text Properties**:
+  - Text color (foreground color) by default.
+  - Optional background color highlight.
+  - Font styling: **Bold**, *Italic*.
+  - Text effects: Boxed border, Rounded box, Underline, Wave underline, and Strikeout with custom effect colors.
+  - Error stripe gutter indicator.
+- **File Types Targeting**: Default is all file types (`*`), or restrict rules to specific extensions (e.g. `java, kt, py, md` or `*.log`).
+- **Interactive Settings Page**: Configure rules in **Settings > Editor > Custom Regex Highlighting** with a real-time live preview panel.
+- **Quick Context Menu Action**: Select any word in an editor, right-click, and select **Add Regex Highlight...** to create a rule instantly.
 
 ## Installation
 
-- Using the IDE built-in plugin system:
+### From Marketplace
+Once published, install via:
+**Settings / Preferences** > **Plugins** > **Marketplace** > Search for **"Additional Custom Syntax Highlight"** > **Install**.
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "additional-custom-syntax-higlight"</kbd> >
-  <kbd>Install</kbd>
-
-- Using JetBrains Marketplace:
-
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
-
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
-- Manually:
-
-  Download the [latest release](https://github.com/Only1Loatheb/additional-custom-syntax-higlight/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
+### From Disk (Local Build)
+1. Build the distribution zip:
+   ```bash
+   ./gradlew buildPlugin
+   ```
+2. In IntelliJ IDEA, go to **Settings / Preferences** > **Plugins** > **⚙️** > **Install Plugin from Disk...**.
+3. Select `build/distributions/additional-custom-syntax-higlight-0.0.1.zip`.
+4. Restart your IDE.
 
 ---
-Plugin based on the [IntelliJ Platform Plugin Template][template].
-
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
+Plugin based on the [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template).
