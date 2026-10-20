@@ -1,19 +1,46 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.only1loatheb.additionalcustomsyntaxhiglight</id>
-    <name>additional-custom-syntax-higlight</name>
+    <name>Additional Custom Syntax Highlight</name>
     <vendor>only1loatheb</vendor>
     <description><![CDATA[
-        <p><b>additional-custom-syntax-higlight</b> is a repository that provides a pure template to make it easier to create a new plugin project.</p>
-        <p>The main goal of this template is to speed up the setup phase of plugin development for both new and experienced developers by preconfiguring the project scaffold and CI, linking to the proper documentation pages, and keeping everything organized.</p>
+        <p><b>Additional Custom Syntax Highlight</b> enables configurable regex-based word search highlighting on top of any language syntax highlighting.</p>
+        <ul>
+            <li>Highlight any regex pattern across all languages and file types.</li>
+            <li>Configure text color (default), background color, bold/italic font styles, and text decorations (boxed, underline, strikeout).</li>
+            <li>Restrict rules to specific file types or apply globally (*).</li>
+            <li>Quick context menu action to highlight words or expressions directly from the editor.</li>
+        </ul>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
+    <applicationListeners>
+        <listener
+            class="com.github.only1loatheb.additionalcustomsyntaxhiglight.listener.RegexEditorFactoryListener"
+            topic="com.intellij.openapi.editor.event.EditorFactoryListener"/>
+    </applicationListeners>
+
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.only1loatheb.additionalcustomsyntaxhiglight.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.only1loatheb.additionalcustomsyntaxhiglight.startup.MyProjectActivity" />
+        <applicationConfigurable
+            parentId="editor"
+            instance="com.github.only1loatheb.additionalcustomsyntaxhiglight.settings.HighlightSettingsConfigurable"
+            id="com.github.only1loatheb.additionalcustomsyntaxhiglight.settings"
+            displayName="Custom Regex Highlighting"/>
+
+        <postStartupActivity
+            implementation="com.github.only1loatheb.additionalcustomsyntaxhiglight.startup.RegexProjectActivity"/>
     </extensions>
+
+    <actions>
+        <action
+            id="com.github.only1loatheb.additionalcustomsyntaxhiglight.actions.QuickHighlightAction"
+            class="com.github.only1loatheb.additionalcustomsyntaxhiglight.actions.QuickHighlightAction"
+            text="Add Regex Highlight..."
+            description="Configure a regex highlight rule for selected text">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>
