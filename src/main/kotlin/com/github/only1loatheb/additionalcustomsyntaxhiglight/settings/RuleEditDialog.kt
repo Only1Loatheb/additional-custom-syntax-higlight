@@ -79,7 +79,7 @@ class RuleEditDialog(
 
     // Live preview
     private val previewTextPane = JTextPane().apply {
-        text = "The quick brown fox jumps over the lazy dog. TODO: inspect 0x1A3F"
+        text = "example ==> `case` value.endCase\n// Match: ==> or `case` or .endCase"
         isEditable = true
         border = JBUI.Borders.customLine(JBUI.CurrentTheme.CustomFrameDecorations.separatorForeground(), 1)
         margin = JBUI.insets(6)

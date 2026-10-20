@@ -147,4 +147,29 @@ class HighlightPluginTest : BasePlatformTestCase() {
             settings.rules = originalRules
         }
     }
+
+    fun testDefaultExampleRulesHighlighting() {
+
+        val settings = HighlightSettingsState.getInstance()
+        val originalRules = settings.rules
+
+        try {
+            // Use the updated default rules
+            settings.rules = HighlightSettingsState.State().rules
+
+            myFixture.configureByText("Test.scala", "val x ==> `case` foo.endCase and case without backticks")
+            val editor = myFixture.editor
+
+            RegexHighlightService.getInstance().highlightEditor(editor)
+            myFixture.doHighlighting()
+
+            val highlighters = editor.getUserData(RegexHighlightService.HIGHLIGHTERS_KEY)
+            assertNotNull("Highlighters should be present", highlighters)
+            // Should match: '==>', '`case`', '.endCase', and 'case'
+            assertTrue("Expected at least 3 matches for default rules, found ${highlighters!!.size}", highlighters.size >= 3)
+        } finally {
+            settings.rules = originalRules
+        }
+    }
 }
+

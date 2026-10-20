@@ -34,24 +34,35 @@ class HighlightSettingsState : PersistentStateComponent<HighlightSettingsState.S
     class State {
         var rules: MutableList<HighlightRule> = mutableListOf(
             HighlightRule(
-                name = "TODO / FIXME / BUG",
-                pattern = "\\b(TODO|FIXME|BUG|XXX)\\b",
+                name = "Arrow (==>)",
+                pattern = "==>",
                 fileTypes = "*",
-                caseSensitive = false,
+                caseSensitive = true,
                 enabled = true,
                 foregroundColorHex = "#E5C07B",
                 bold = true
             ),
             HighlightRule(
-                name = "Hex Numbers",
-                pattern = "\\b0x[0-9a-fA-F]+\\b",
+                name = "Case (`case`)",
+                pattern = "(`case`|\\bcase\\b)",
                 fileTypes = "*",
                 caseSensitive = false,
                 enabled = true,
-                foregroundColorHex = "#61AFEF"
+                foregroundColorHex = "#E06C75",
+                bold = true
+            ),
+            HighlightRule(
+                name = "EndCase (.endCase)",
+                pattern = "\\.endCase\\b",
+                fileTypes = "*",
+                caseSensitive = false,
+                enabled = true,
+                foregroundColorHex = "#61AFEF",
+                bold = true
             )
         )
     }
+
 
     private var myState = State()
 
